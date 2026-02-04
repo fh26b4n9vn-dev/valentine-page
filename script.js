@@ -79,20 +79,36 @@ function moveNoButton() {
     // Force a reflow to get updated dimensions
     elements.btnNo.offsetWidth;
 
-    // NOW calculate position with updated button size
+    // Get dimensions
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const btnWidth = elements.btnNo.offsetWidth;
     const btnHeight = elements.btnNo.offsetHeight;
 
-    // Calculate safe boundaries with extra margin
-    const margin = 80;
-    const maxX = windowWidth - btnWidth - margin;
-    const maxY = windowHeight - btnHeight - margin;
+    // Use larger margin and ensure we have enough space
+    const margin = 100;
 
-    // Generate random position (ensure it's within bounds)
-    const newX = Math.max(margin, Math.min(margin + Math.random() * (maxX - margin), maxX));
-    const newY = Math.max(margin, Math.min(margin + Math.random() * (maxY - margin), maxY));
+    // Calculate SAFE boundaries - ensure they're positive
+    const minX = margin;
+    const minY = margin;
+    const maxX = Math.max(minX + 100, windowWidth - btnWidth - margin);
+    const maxY = Math.max(minY + 100, windowHeight - btnHeight - margin);
+
+    // If there's not enough space, use center of screen as fallback
+    let newX, newY;
+    if (maxX <= minX || maxY <= minY) {
+        // Fallback: center area
+        newX = (windowWidth - btnWidth) / 2 + (Math.random() - 0.5) * 200;
+        newY = (windowHeight - btnHeight) / 2 + (Math.random() - 0.5) * 200;
+    } else {
+        // Generate random position within safe bounds
+        newX = minX + Math.random() * (maxX - minX);
+        newY = minY + Math.random() * (maxY - minY);
+    }
+
+    // Final safety clamp to ensure it's visible
+    newX = Math.max(10, Math.min(newX, windowWidth - btnWidth - 10));
+    newY = Math.max(10, Math.min(newY, windowHeight - btnHeight - 10));
 
     // Apply new position
     elements.btnNo.style.position = 'fixed';
@@ -100,11 +116,8 @@ function moveNoButton() {
     elements.btnNo.style.top = `${newY}px`;
 
     // Add a little rotation for fun
-    const rotation = (Math.random() - 0.5) * 20;
-    elements.btnNo.style.transform = `rotate(${rotation}deg)`;
-
-    // Play with scale
-    elements.btnNo.style.transform += ` scale(${0.9 + Math.random() * 0.2})`;
+    const rotation = (Math.random() - 0.5) * 15;
+    elements.btnNo.style.transform = `rotate(${rotation}deg) scale(1)`;
 
     // Reset movement flag after transition
     setTimeout(() => {
