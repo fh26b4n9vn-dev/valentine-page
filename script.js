@@ -71,29 +71,33 @@ function moveNoButton() {
     if (isNoButtonMoving) return;
     isNoButtonMoving = true;
 
+    // Change button text FIRST
+    noButtonClickCount++;
+    const phraseIndex = Math.min(noButtonClickCount, CONFIG.noButtonPhrases.length - 1);
+    elements.btnNo.querySelector('span').textContent = CONFIG.noButtonPhrases[phraseIndex];
+
+    // Force a reflow to get updated dimensions
+    elements.btnNo.offsetWidth;
+
+    // NOW calculate position with updated button size
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const btnWidth = elements.btnNo.offsetWidth;
     const btnHeight = elements.btnNo.offsetHeight;
 
-    // Calculate safe boundaries
-    const margin = 50;
+    // Calculate safe boundaries with extra margin
+    const margin = 80;
     const maxX = windowWidth - btnWidth - margin;
     const maxY = windowHeight - btnHeight - margin;
 
-    // Generate random position
-    const newX = margin + Math.random() * (maxX - margin);
-    const newY = margin + Math.random() * (maxY - margin);
+    // Generate random position (ensure it's within bounds)
+    const newX = Math.max(margin, Math.min(margin + Math.random() * (maxX - margin), maxX));
+    const newY = Math.max(margin, Math.min(margin + Math.random() * (maxY - margin), maxY));
 
     // Apply new position
     elements.btnNo.style.position = 'fixed';
     elements.btnNo.style.left = `${newX}px`;
     elements.btnNo.style.top = `${newY}px`;
-
-    // Change button text
-    noButtonClickCount++;
-    const phraseIndex = Math.min(noButtonClickCount, CONFIG.noButtonPhrases.length - 1);
-    elements.btnNo.querySelector('span').textContent = CONFIG.noButtonPhrases[phraseIndex];
 
     // Add a little rotation for fun
     const rotation = (Math.random() - 0.5) * 20;
