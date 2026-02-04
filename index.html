@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veux-tu être ma Valentine ? 💖</title>
+    <meta name="description" content="Une question importante pour la Saint-Valentin">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- Question State -->
+    <div class="container" id="questionState">
+        <div class="heart-icon">💕</div>
+        <h1 class="title">Veux-tu être ma Valentine ?</h1>
+        <div class="buttons-container">
+            <button id="btnYes" class="btn btn-yes">
+                <span>Oui ! 💖</span>
+            </button>
+            <button id="btnNo" class="btn btn-no">
+                <span>Non</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="container hidden" id="loadingState">
+        <div class="heart-icon pulse">✨</div>
+        <h2 class="subtitle">Magie en cours...</h2>
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <p class="loading-text">Préparation de quelque chose de spécial...</p>
+    </div>
+
+    <!-- Success State -->
+    <div class="container hidden" id="successState">
+        <div class="heart-icon celebration">💖</div>
+        <h1 class="title success-title">Yesss ! 🎉</h1>
+        <p class="success-message">Je savais que tu allais dire oui !</p>
+        <div class="confetti" id="confetti"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

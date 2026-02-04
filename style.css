@@ -1,0 +1,392 @@
+/* ==================== CSS Variables ==================== */
+:root {
+    /* Colors */
+    --primary-pink: #ff0066;
+    --primary-pink-dark: #cc0052;
+    --primary-pink-light: #ff3385;
+    --secondary-pink: #ff99cc;
+    --bg-gradient-1: #fff0f5;
+    --bg-gradient-2: #ffe4f0;
+    --white: #ffffff;
+    --text-dark: #2d2d2d;
+    --text-light: #666666;
+    --shadow-light: rgba(255, 0, 102, 0.2);
+    --shadow-medium: rgba(255, 0, 102, 0.3);
+    --shadow-heavy: rgba(0, 0, 0, 0.1);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Typography */
+    --font-family: 'Poppins', sans-serif;
+    --font-size-base: 16px;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 50px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ==================== Reset & Base Styles ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ==================== Floating Hearts Background ==================== */
+.hearts-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float-up 8s linear infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ==================== Container ==================== */
+.container {
+    position: relative;
+    z-index: 10;
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px var(--shadow-heavy);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.container.hidden {
+    display: none;
+}
+
+/* ==================== Typography ==================== */
+.heart-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30% {
+        transform: scale(1.1);
+    }
+    20%, 40% {
+        transform: scale(0.95);
+    }
+}
+
+.heart-icon.pulse {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+.heart-icon.celebration {
+    animation: celebration 0.8s ease-out;
+    font-size: 5rem;
+}
+
+@keyframes celebration {
+    0% {
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.3) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.success-title {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.success-message {
+    font-size: var(--font-size-xl);
+    color: var(--text-light);
+    margin-top: var(--spacing-md);
+}
+
+.loading-text {
+    margin-top: var(--spacing-md);
+    color: var(--text-light);
+    font-size: var(--font-size-lg);
+}
+
+/* ==================== Buttons ==================== */
+.buttons-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 80px;
+}
+
+.btn {
+    position: relative;
+    padding: 1rem 2.5rem;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    font-family: var(--font-family);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    outline: none;
+    overflow: hidden;
+}
+
+.btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Yes Button */
+.btn-yes {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-light) 100%);
+    color: var(--white);
+    box-shadow: 0 8px 25px var(--shadow-light);
+}
+
+.btn-yes:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px var(--shadow-medium);
+}
+
+.btn-yes:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* No Button */
+.btn-no {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    transition: all var(--transition-medium) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-no:hover {
+    background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
+}
+
+/* ==================== Progress Bar ==================== */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-lg);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-pink) 0%, var(--primary-pink-light) 50%, var(--primary-pink) 100%);
+    background-size: 200% 100%;
+    width: 0%;
+    border-radius: var(--radius-sm);
+    transition: width 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ==================== Confetti ==================== */
+.confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-pink);
+    top: -10px;
+    opacity: 0;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 640px) {
+    .container {
+        padding: var(--spacing-lg);
+        width: 95%;
+    }
+    
+    .title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .subtitle {
+        font-size: var(--font-size-xl);
+    }
+    
+    .heart-icon {
+        font-size: 3rem;
+    }
+    
+    .btn {
+        padding: 0.875rem 2rem;
+        font-size: var(--font-size-base);
+    }
+    
+    .buttons-container {
+        flex-direction: column;
+    }
+}
+
+/* ==================== Accessibility ==================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
