@@ -71,9 +71,9 @@ function moveNoButton() {
     if (isNoButtonMoving) return;
     isNoButtonMoving = true;
 
-    // Change button text FIRST
+    // Change button text FIRST - cycle through phrases indefinitely
     noButtonClickCount++;
-    const phraseIndex = Math.min(noButtonClickCount, CONFIG.noButtonPhrases.length - 1);
+    const phraseIndex = noButtonClickCount % CONFIG.noButtonPhrases.length;
     elements.btnNo.querySelector('span').textContent = CONFIG.noButtonPhrases[phraseIndex];
 
     // Force a reflow to get updated dimensions
